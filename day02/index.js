@@ -44,3 +44,44 @@ data.forEach((game) => {
 });
 
 console.log(totalForPartOne);
+
+let totalForPartTwo = 0;
+
+const parseGamesPartTwo = (str) => {
+  const id = str.slice(4, str.indexOf(":"));
+  const rounds = str.slice(str.indexOf(":") + 2).split("; ");
+
+  let maxPossibleReds = 0;
+  let maxPossibleGreens = 0;
+  let maxPossibleBlues = 0;
+
+  rounds.forEach((round) => {
+    const draws = round.split(", ");
+    draws.forEach((draw) => {
+      if (
+        draw.includes("red") &&
+        Number(draw.slice(0, draw.indexOf(" "))) > maxPossibleReds
+      ) {
+        maxPossibleReds = Number(draw.slice(0, draw.indexOf(" ")));
+      } else if (
+        draw.includes("green") &&
+        Number(draw.slice(0, draw.indexOf(" "))) > maxPossibleGreens
+      ) {
+        maxPossibleGreens = Number(draw.slice(0, draw.indexOf(" ")));
+      } else if (
+        draw.includes("blue") &&
+        Number(draw.slice(0, draw.indexOf(" "))) > maxPossibleBlues
+      ) {
+        maxPossibleBlues = Number(draw.slice(0, draw.indexOf(" ")));
+      }
+    });
+  });
+
+  totalForPartTwo += maxPossibleReds * maxPossibleGreens * maxPossibleBlues;
+};
+
+data.forEach((game) => {
+  parseGamesPartTwo(game);
+});
+
+console.log(totalForPartTwo);
