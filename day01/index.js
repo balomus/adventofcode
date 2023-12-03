@@ -6,8 +6,6 @@ const getFirstAndLastDigit = (str) => {
   const regex = /([0-9])/g;
   const justNums = str.match(regex);
 
-  // console.log(justNums);
-  // console.log(justNums[0]);
   if (justNums === null) {
     return null;
   } else {
@@ -23,62 +21,47 @@ data.forEach((element) => {
 
 const sumForPart1 = arrForPart1.reduce((sum, cur) => sum + cur);
 
-const getWordNumbers = (str) => {
-  // console.log(str);
-  const regex = /(zero|one|two|three|four|five|six|seven|eight|nine|[0-9])/g;
-  const justStrings = str.match(regex);
-
-  // console.log(justStrings);
-
-  // console.log(justStrings[0], justStrings.pop());
-  return (
-    convertWordToNumber(justStrings[0]) + convertWordToNumber(justStrings.pop())
-  );
-};
-
-const convertWordToNumber = (str) => {
-  switch (str) {
-    case "zero":
-      return "0";
-    case "one":
-      return "1";
-    case "two":
-      return "2";
-    case "three":
-      return "3";
-    case "four":
-      return "4";
-    case "five":
-      return "5";
-    case "six":
-      return "6";
-    case "seven":
-      return "7";
-    case "eight":
-      return "8";
-    case "nine":
-      return "9";
-    default:
-      return str;
-  }
-};
+console.log("Answer for part 1:", sumForPart1);
 
 const arrForPart2 = [];
 
+const transformStringsToNumbers = (str) => {
+  let newStr = str;
+  if (str.includes("one")) {
+    newStr = newStr.replaceAll("one", "o1e");
+  }
+  if (str.includes("two")) {
+    newStr = newStr.replaceAll("two", "t2o");
+  }
+  if (str.includes("three")) {
+    newStr = newStr.replaceAll("three", "t3ree");
+  }
+  if (str.includes("four")) {
+    newStr = newStr.replaceAll("four", "f4ur");
+  }
+  if (str.includes("five")) {
+    newStr = newStr.replaceAll("five", "f5ve");
+  }
+  if (str.includes("six")) {
+    newStr = newStr.replaceAll("six", "s6x");
+  }
+  if (str.includes("seven")) {
+    newStr = newStr.replaceAll("seven", "s7ven");
+  }
+  if (str.includes("eight")) {
+    newStr = newStr.replaceAll("eight", "e8ght");
+  }
+  if (str.includes("nine")) {
+    newStr = newStr.replaceAll("nine", "n9ne");
+  }
+
+  arrForPart2.push(Number(getFirstAndLastDigit(newStr)));
+};
+
 data.forEach((element) => {
-  // console.log(element);
-
-  arrForPart2.push(Number(getWordNumbers(element)));
-
-  // console.log(Number(getWordNumbers(element)));
-
-  // console.log("arrForPart2", arrForPart2);
+  transformStringsToNumbers(element);
 });
-console.log(arrForPart2);
 
 const sumForPart2 = arrForPart2.reduce((sum, cur) => sum + cur);
 
-console.log("Part 1 answer:", sumForPart1);
-
-console.log("part 2", sumForPart2);
-// two1nine
+console.log("Answer for part 2:", sumForPart2);
