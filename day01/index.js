@@ -1,5 +1,4 @@
 import parseLines from "../utils/parse.js";
-
 const data = parseLines("./day01/input.txt");
 
 const getFirstAndLastDigit = (str) => {
