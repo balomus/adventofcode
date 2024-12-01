@@ -1,5 +1,6 @@
-import parseLines from "../utils/parse.js";
-const data = parseLines("./day01/input.txt");
+// import parseLines from "../utils/parse.js";
+import parseLines from "../../utils/parse.js";
+const data = parseLines("./2023/day01/input.txt");
 
 const getFirstAndLastDigit = (str) => {
   const regex = /([0-9])/g;
