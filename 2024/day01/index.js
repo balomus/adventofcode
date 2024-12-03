@@ -7,7 +7,7 @@ const secondArr = [];
 let totalForPartOne = 0;
 
 data.forEach((element) => {
-  const stringSplitArr = element.trim().split(" ").filter(Boolean);
+  const stringSplitArr = element.split(" ").filter(Boolean);
   firstArr.push(Number(stringSplitArr[0]));
   secondArr.push(Number(stringSplitArr[1]));
 });
