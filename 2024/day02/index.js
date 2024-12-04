@@ -69,3 +69,31 @@ reports.forEach((report) => {
 console.log(totalForPartOne);
 
 // part 2
+const checkIfSafeByRemovingOneElement = (arr) => {
+  if (
+    checkIfAscendingOrDescending(arr) &&
+    checkIfDifferenceIsOneTwoOrThree(arr)
+  ) {
+    return true;
+  }
+
+  for (let i = 0; i < arr.length; i++) {
+    const newArr = arr.slice(0, i).concat(arr.slice(i + 1));
+    if (
+      checkIfAscendingOrDescending(newArr) &&
+      checkIfDifferenceIsOneTwoOrThree(newArr)
+    ) {
+      return true;
+    }
+  }
+};
+
+let totalForPartTwo = 0;
+
+reports.forEach((report) => {
+  if (checkIfSafeByRemovingOneElement(report)) {
+    totalForPartTwo += 1;
+  }
+});
+
+console.log(totalForPartTwo);
