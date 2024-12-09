@@ -4,65 +4,48 @@ const data = parseLines("./2024/day04/input.txt");
 
 let totalForPartOne = 0;
 
-const checkIfXMAS = (string) => {
-  const xmas = "XMAS";
-  if (string === xmas) {
+const checkIfMatch = (string, target) => {
+  if (string === target) {
     totalForPartOne++;
   }
 };
 
+const generateString = (rowIndex, charIndex, rowDir, charDir, targetStr) => {
+  let string = "";
+  for (let i = 0; i < targetStr.length; i++) {
+    string += data?.[rowIndex + i * rowDir]?.[charIndex + i * charDir];
+  }
+  return string;
+};
+
+const xmas = "XMAS";
+
 data.forEach((row, rowIndex) => {
   row.split("").forEach((char, charIndex) => {
     if (char === "X") {
-      const rowForward =
-        char +
-        row?.[charIndex + 1] +
-        row?.[charIndex + 2] +
-        row?.[charIndex + 3];
-      const rowBackward =
-        char +
-        row?.[charIndex - 1] +
-        row?.[charIndex - 2] +
-        row?.[charIndex - 3];
-      const colDown =
-        char +
-        data?.[rowIndex + 1]?.[charIndex] +
-        data?.[rowIndex + 2]?.[charIndex] +
-        data?.[rowIndex + 3]?.[charIndex];
-      const colUp =
-        char +
-        data?.[rowIndex - 1]?.[charIndex] +
-        data?.[rowIndex - 2]?.[charIndex] +
-        data?.[rowIndex - 3]?.[charIndex];
-      const diagDownRight =
-        char +
-        data?.[rowIndex + 1]?.[charIndex + 1] +
-        data?.[rowIndex + 2]?.[charIndex + 2] +
-        data?.[rowIndex + 3]?.[charIndex + 3];
-      const diagDownLeft =
-        char +
-        data?.[rowIndex + 1]?.[charIndex - 1] +
-        data?.[rowIndex + 2]?.[charIndex - 2] +
-        data?.[rowIndex + 3]?.[charIndex - 3];
-      const diagUpRight =
-        char +
-        data?.[rowIndex - 1]?.[charIndex + 1] +
-        data?.[rowIndex - 2]?.[charIndex + 2] +
-        data?.[rowIndex - 3]?.[charIndex + 3];
-      const diagUpLeft =
-        char +
-        data?.[rowIndex - 1]?.[charIndex - 1] +
-        data?.[rowIndex - 2]?.[charIndex - 2] +
-        data?.[rowIndex - 3]?.[charIndex - 3];
+      const rowForward = generateString(rowIndex, charIndex, 1, 0, xmas);
+      const rowBackward = generateString(rowIndex, charIndex, -1, 0, xmas);
+      const colDown = generateString(rowIndex, charIndex, 0, 1, xmas);
+      const colUp = generateString(rowIndex, charIndex, 0, -1, xmas);
+      const diagDownRight = generateString(rowIndex, charIndex, 1, 1, xmas);
+      const diagDownLeft = generateString(rowIndex, charIndex, -1, 1, xmas);
+      const diagUpRight = generateString(rowIndex, charIndex, 1, -1, xmas);
+      const diagUpLeft = generateString(rowIndex, charIndex, -1, -1, xmas);
 
-      checkIfXMAS(rowForward);
-      checkIfXMAS(rowBackward);
-      checkIfXMAS(colDown);
-      checkIfXMAS(colUp);
-      checkIfXMAS(diagDownRight);
-      checkIfXMAS(diagDownLeft);
-      checkIfXMAS(diagUpRight);
-      checkIfXMAS(diagUpLeft);
+      const strings = [
+        rowForward,
+        rowBackward,
+        colDown,
+        colUp,
+        diagDownRight,
+        diagDownLeft,
+        diagUpRight,
+        diagUpLeft,
+      ];
+
+      strings.forEach((string) => {
+        checkIfMatch(string, "XMAS");
+      });
     }
   });
 });
