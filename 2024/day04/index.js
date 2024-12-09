@@ -53,3 +53,42 @@ data.forEach((row, rowIndex) => {
 console.log(totalForPartOne);
 
 // part 2
+
+const isXPattern = (rowIndex, charIndex, targetStr) => {
+  const stringOne =
+    data?.[rowIndex - 1]?.[charIndex - 1] +
+    data?.[rowIndex]?.[charIndex] +
+    data?.[rowIndex + 1]?.[charIndex + 1];
+
+  const stringTwo =
+    data?.[rowIndex - 1]?.[charIndex + 1] +
+    data?.[rowIndex]?.[charIndex] +
+    data?.[rowIndex + 1]?.[charIndex - 1];
+
+  if (
+    stringOne === targetStr ||
+    stringOne.split("").reverse().join("") === targetStr
+  ) {
+    if (
+      stringTwo === targetStr ||
+      stringTwo.split("").reverse().join("") === targetStr
+    ) {
+      return true;
+    }
+  }
+  return false;
+};
+
+let totalForPartTwo = 0;
+
+data.forEach((row, rowIndex) => {
+  row.split("").forEach((char, charIndex) => {
+    if (char === "A") {
+      if (isXPattern(rowIndex, charIndex, "MAS")) {
+        totalForPartTwo++;
+      }
+    }
+  });
+});
+
+console.log(totalForPartTwo);
