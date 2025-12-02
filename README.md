@@ -8,4 +8,6 @@ There is a parse.js util file that is imported into each day's index.js file.
 
 To run a particular day, you can run `node .\2024\day01\index.js` or `node .\2024\day02\index.js` depending on the day you want to run.
 
+For .ts files, you can first install tsx with `npm install -g tsx`, then run the file with `tsx .\2024\day02\index.ts`
+
 I try to comment part 1 and part 2 of each day.
